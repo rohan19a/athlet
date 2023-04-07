@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Athlet Homepage</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+</head>
+
+<body ng-controller="myCtrl">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="#">{{ companyName }}</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+<ul class="navbar-nav ml-auto">
+<li class="nav-item">
+<a class="nav-link" href="#">Home</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">About</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">Contact</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">Profile</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">Messages</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="#">Notifications</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">Connections</a>
+    </li>
+    </ul>
+    </div>
+    </nav>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-2 sidebar">
+				<h2>Sidebar</h2>
+				<ul class="list-unstyled">
+					<li><a href="#">Link 1</a></li>
+					<li><a href="#">Link 2</a></li>
+					<li><a href="#">Link 3</a></li>
+					<li><a href="#">Link 4</a></li>
+				</ul>
+			</div>
+			<div class="col-md-8">
+				<div class="post-container">
+					<div class="post" ng-repeat="post in posts">
+						<div class="post-header">
+							<div class="profile-pic"></div>
+							<div class="post-header-info">
+								<h4>{{ post.name }}</h4>
+								<p>{{ post.title }}</p>
+							</div>
+						</div>
+						<div class="post-content">
+							<p>{{ post.content }}</p>
+							<img ng-if="post.image" src="{{ post.image }}" alt="Post Image">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<h2>Right Sidebar</h2>
+				<p>Right sidebar content goes here.</p>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script>
+		var app = angular.module('myApp', []);
+
+		app.controller('myCtrl', function($scope) {
+			$scope.companyName = "Athlet";
+			$scope.posts = [
+				{
+					profilePhoto: "https://via.placeholder.com/50",
+					name: "John Doe",
+					title: "Lorem ipsum dolor sit amet",
+					image: "https://via.placeholder.com/300",
+					content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices ante eu dolor consectetur, vitae ultrices justo varius. Fusce eget nisl quam. Proin vel neque non eros elementum molestie. Ut tristique rutrum semper. Etiam volutpat vel quam sit amet imperdiet. Etiam dignissim erat ac ex egestas faucibus. Nunc fringilla eget elit quis vulputate. Nam rhoncus turpis mauris, quis consectetur metus auctor nec."
+				},
+				{
+					profilePhoto: "https://via.placeholder.com/50",
+					name: "Jane Smith",
+					title: "Lorem ipsum dolor sit amet",
+					image: "",
+					content: "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec a sapien eros. Maecenas euismod neque ex, ut sodales lectus tristique sit amet. Donec vehicula placerat lacus, non lobortis tortor. In hac habitasse platea dictumst. Integer ullamcorper orci id imperdiet bibendum. Donec vel orci aliquet, semper urna a, bibendum nisi. Aliquam tristique purus vel risus pulvinar luctus."
+				},
+				{
+					profilePhoto: "https://via.placeholder.com/50",
+					name: "Bob Johnson",
+					title: "Lorem ipsum dolor sit amet",
+					image: "",
+					content: "Nam vestibulum nulla vitae risus lacinia, ut vehicula nulla ultricies. Vestibulum auctor ultrices urna in eleifend. In hac habitasse platea dictumst. Proin id tincidunt dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nunc molestie sapien a libero ultricies, quis dapibus libero maximus. Donec finibus eget est ac consequat. Nam consequat blandit sem quis eleifend. Nulla sit amet mauris non augue pulvinar rhoncus."
+				}
+			];
+		});
+
+	</script>
