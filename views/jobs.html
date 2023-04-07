@@ -1,5 +1,50 @@
-<div ng-controller="jobsController">
-    <h1>Jobs</h1>
-    <!-- Add your jobs content here -->
+<html ng-app="myApp">
+  <div ng-controller="JobsController">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="job-listings">
+            <div class="job" ng-repeat="job in jobs">
+              <h3>{{ job.title }}</h3>
+              <p>{{ job.description }}</p>
+              <p><strong>{{ job.company }}</strong></p>
+              <p>{{ job.location }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+<script>
+  //import angular 
+var app = angular.module('myApp', []);
+
+app.controller('JobsController', function($scope) {
+  console.log("JobsController loaded")
+  $scope.jobs = [
+    {
+      title: "Software Developer",
+      description: "Develop software using modern programming languages",
+      company: "Acme Inc.",
+      location: "San Francisco, CA"
+    },
+    {
+      title: "Data Analyst",
+      description: "Analyze data using statistical techniques",
+      company: "XYZ Corp.",
+      location: "New York, NY"
+    },
+    {
+      title: "Marketing Manager",
+      description: "Develop and implement marketing strategies",
+      company: "Marketing Co.",
+      location: "Los Angeles, CA"
+    },
+  ];
+});
+</script>

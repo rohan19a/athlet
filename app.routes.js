@@ -8,21 +8,20 @@ angular.module('linkd_sport', ['ngRoute'])
         templateUrl: 'views/login.html',
         controller: 'LoginController'
         })
-        
 
     .when('/home', {
       templateUrl: 'views/home.html',
       controller: 'HomeController'
     })
 
-    .when('/about', {
-      templateUrl: 'views/about.html',
-      controller: 'AboutController'
+    .when('/messaging', {
+      templateUrl: 'views/messaging.html',
+      controller: 'messageController'
     })
 
     .when('/contact', {
-      templateUrl: 'views/contact.html',
-      controller: 'ContactController'
+      templateUrl: 'views/jobs.html',
+      controller: 'jobsController'
     })
 
     .when('/profile', {
@@ -31,7 +30,7 @@ angular.module('linkd_sport', ['ngRoute'])
     })
 
     .when('/login', {
-      templateUrl: 'login.html',
+      templateUrl: 'view/login.html',
       controller: 'LoginController'
     })
 

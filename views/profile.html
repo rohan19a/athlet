@@ -1,5 +1,40 @@
-<div ng-controller="profileController">
-    <h1>My Profile</h1>
-    <!-- Add your profile content here -->
-  </div>
-  
+<div ng-controller="ProfileCtrl">
+  <h1>{{user.name}}'s Profile</h1>
+  <img src="{{user.profilePic}}" alt="Profile picture">
+  <p>{{user.bio}}</p>
+  <ul>
+    <li><strong>Location:</strong> {{user.location}}</li>
+    <li><strong>Education:</strong> {{user.education}}</li>
+    <li><strong>Skills:</strong> {{user.skills}}</li>
+    <li><strong>Experience:</strong> {{user.experience}}</li>
+  </ul>
+</div>
+
+<script>
+    myApp.controller('ProfileCtrl', function($scope, UserService) {
+  $scope.user = UserService.getCurrentUser();
+});
+</script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+<!-- dummy data
+
+  app.controller('ProfileCtrl', function($scope, $routeParams) {
+  // Here, you would retrieve the user data based on the $routeParams.userId parameter
+  // For example, you could make an HTTP request to your server to fetch the user data
+  // and then set it on the $scope.user object
+  // For the sake of simplicity, we will use dummy data here:
+  $scope.user = {
+    name: 'John Smith',
+    profilePic: 'https://via.placeholder.com/150',
+    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    location: 'San Francisco, CA',
+    education: 'University of California, Berkeley',
+    skills: 'JavaScript, HTML, CSS',
+    experience: '3 years of web development experience'
+  };
+});
+
+-->

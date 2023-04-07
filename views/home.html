@@ -10,6 +10,7 @@
 
 </head>
 
+
 <body ng-controller="myCtrl">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="#">{{ companyName }}</a>
@@ -34,7 +35,7 @@
 <a class="nav-link" href="#">Messages</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="#">Notifications</a>
+    <a class="nav-link" ng-click="showNotifications()">Notifications <span class="badge badge-light">{{ notifications.length }}</span></a>
     </li>
     <li class="nav-item">
     <a class="nav-link" href="#">Connections</a>
@@ -42,6 +43,17 @@
     </ul>
     </div>
     </nav>
+
+    <div ng-show="notificationsVisible" class="notifications-widget">
+        <ul>
+          <li ng-repeat="notification in notifications" ng-class="{read: notification.read}">
+            {{notification.text}}
+          </li>
+        </ul>
+      </div>
+      
+
+
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-2 sidebar">
@@ -83,7 +95,7 @@
 	<script>
 		var app = angular.module('myApp', []);
 
-		app.controller('myCtrl', function($scope) {
+		app.controller('myCtrl', function($scope, $location) {
 			$scope.companyName = "Athlet";
 			$scope.posts = [
 				{
@@ -108,6 +120,36 @@
 					content: "Nam vestibulum nulla vitae risus lacinia, ut vehicula nulla ultricies. Vestibulum auctor ultrices urna in eleifend. In hac habitasse platea dictumst. Proin id tincidunt dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nunc molestie sapien a libero ultricies, quis dapibus libero maximus. Donec finibus eget est ac consequat. Nam consequat blandit sem quis eleifend. Nulla sit amet mauris non augue pulvinar rhoncus."
 				}
 			];
-		});
+
+  // Define the list of navbar items
+  $scope.navbarItems = [
+    { title: 'Home', path: '/' },
+    { title: 'Jobs', path: '/jobs' },
+    { title: 'Connections', path: '/connections' },
+    { title: 'Messages', path: '/messages' },
+    { title: 'Notifications', path: '/notifications' },
+    { title: 'Profile', path: '/profile' }
+  ];
+
+  // Get the current path
+  $scope.currentPath = $location.path();
+
+  // Check if the given path is active
+  $scope.isActive = function(path) {
+    return $location.path() === path;
+  };
+
+  $scope.notifications = [
+    {text: 'You have a new message', read: false},
+    {text: 'Your post was liked by Jane', read: true},
+    {text: 'New job posting: Front-end Developer', read: false}
+  ];
+  
+  $scope.showNotifications = function() {
+    $scope.notificationsVisible = !$scope.notificationsVisible;
+  };
+
+});
+
 
 	</script>
