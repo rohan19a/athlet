@@ -1,14 +1,23 @@
-var app = angular.module('myApp', []);
+var myApp = angular.module('myApp', ['ngRoute']);
 
-app.controller('loginCtrl', function($scope) {
-	$scope.login = function() {
-		// Write your login logic here
-		if ($scope.email == 'user@example.com' && $scope.password == 'password') {
-			// Successful login, navigate to dashboard
-			window.location.href = 'dashboard.html';
-		} else {
-			// Login failed, display error message
-			$scope.error = 'Invalid email or password';
-		}
-	};
+myApp.config(function ($locationProvider, $routeProvider) {
+  $locationProvider.html5Mode({
+  enabled:true
+});
+  $routeProvider
+    .when('/', {
+      templateUrl: 'views/welcome.html',
+      controller: 'WelcomeController'
+    })
+    .when('/signup', {
+      templateUrl: 'views/signup.html',
+      controller: 'SignupController'
+    })
+    .when('/login', {
+      templateUrl: 'views/login.html',
+      controller: 'LoginController'
+    })
+    .otherwise({
+      redirectTo: '/'
+    });
 });

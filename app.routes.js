@@ -1,44 +1,24 @@
-angular.module('linkd_sport', ['ngRoute'])
+var app = angular.module("myApp", ["ngRoute"]);
 
-.config(function($routeProvider, $locationProvider) {
-
+app.config(function ($locationProvider, $routeProvider) {
+  $locationProvider.html5Mode({
+  enabled:true
+});
   $routeProvider
-
-    .when('/login', {
-        templateUrl: 'views/login.html',
-        controller: 'LoginController'
-        })
-
-    .when('/home', {
-      templateUrl: 'views/home.html',
-      controller: 'HomeController'
+    .when("/", {
+      templateUrl: "views/welcome.html",
+      controller: "WelcomeController"
     })
-
-    .when('/messaging', {
-      templateUrl: 'views/messaging.html',
-      controller: 'messageController'
+    .when("/signup", {
+      templateUrl: "views/signup.html",
+      controller: "SignupController"
     })
-
-    .when('/contact', {
-      templateUrl: 'views/jobs.html',
-      controller: 'jobsController'
+    .when("/login", {
+      templateUrl: "views/login.html",
+      controller: "LoginController"
     })
-
-    .when('/profile', {
-      templateUrl: 'profile.html',
-      controller: 'ProfileController'
-    })
-
-    .when('/login', {
-      templateUrl: 'view/login.html',
-      controller: 'LoginController'
-    })
-
     .otherwise({
-      redirectTo: '/home'
+      redirectTo: "/"
     });
 
-  // use the HTML5 History API
-  $locationProvider.html5Mode(true);
-
-})
+});

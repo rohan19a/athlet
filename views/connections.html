@@ -1,5 +1,101 @@
-<div ng-controller="connectionsController">
-    <h1>My Connections</h1>
-    <!-- Add your connections content here -->
-  </div>
-  
+<html ng-app="myApp">
+  <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">
+      {{ companyName }}
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon">
+      </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="./home">
+        Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./profile">
+        Profile
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./messaging">
+        Messages
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./connections">
+        Connections
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="./jobs">
+        Jobs
+        </a>
+        <li class="nav-item">
+        <a class="nav-link" ng-click="showNotifications()">
+          Notifications
+          <span class="badge badge-light">
+          {{ notifications.length }}
+          </span>
+        </a>
+        </li>
+      </ul>
+    </div>
+    </nav>
+    
+  <body ng-controller="ConnectionsController">
+
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>My Connections</h2>
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search...">
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-sm-4" ng-repeat="connection in connections">
+              <div class="connection-box" ng-click="viewProfile(connection)">
+                <img class="profile-pic" ng-src="{{ connection.profilePic }}" alt="{{ connection.name }}'s profile picture">
+                <h4>{{ connection.name }}</h4>
+                <p>{{ connection.title }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h2>Suggested Connections</h2>
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search...">
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-sm-4" ng-repeat="suggestedConnection in suggestedConnections">
+              <div class="connection-box" ng-click="addConnection(suggestedConnection)">
+                <img class="profile-pic" ng-src="{{ suggestedConnection.profilePic }}" alt="{{ suggestedConnection.name }}'s profile picture">
+                <h4>{{ suggestedConnection.name }}</h4>
+                <p>{{ suggestedConnection.title }}</p>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary">Find More Contacts</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+    <script src="../controllers/ConnectionsController.js"></script>
+  </body>
+</html>

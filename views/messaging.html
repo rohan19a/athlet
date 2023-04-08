@@ -1,5 +1,95 @@
-<div ng-controller="messagingController">
-    <h1>Messaging</h1>
-    <!-- Add your messaging content here -->
-  </div>
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="MessagingController">
+  <head>
+    <meta charset="UTF-8">
+    <title>Messaging</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
   
+  </head>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">
+    {{ companyName }}
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+    </span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="./home">
+      Home
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./profile">
+      Profile
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./messaging">
+      Messages
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./connections">
+      Connections
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./jobs">
+      Jobs
+      </a>
+      <li class="nav-item">
+      <a class="nav-link" ng-click="showNotifications()">
+        Notifications
+        <span class="badge badge-light">
+        {{ notifications.length }}
+        </span>
+      </a>
+      </li>
+    </ul>
+  </div>
+  </nav>
+
+<div ng-controller="MessagesController">
+  <h2>Messages</h2>
+  <div class="row">
+    <div class="col-sm-4">
+      <input type="text" placeholder="Search conversations" ng-model="searchQuery" class="form-control">
+      <ul class="conversation-list">
+        <li ng-repeat="conversation in conversations | filter: searchQuery" ng-class="{ 'active': conversation.id === selectedConversation.id }" ng-click="selectConversation(conversation)">
+          <img ng-src="{{ conversation.profilePic }}" alt="{{ conversation.name }}'s profile picture">
+          <div class="conversation-details">
+            <h4>{{ conversation.name }}</h4>
+            <p>{{ conversation.lastMessage }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-8">
+      <div class="message-box">
+        <h3>{{ selectedConversation.name }}</h3>
+        <div class="messages" ng-repeat="message in selectedConversation.messages">
+          <div ng-class="{ 'right': message.sender === currentUser }">
+            <img ng-src="{{ message.profilePic }}" alt="{{ message.sender }}'s profile picture">
+            <p>{{ message.content }}</p>
+          </div>
+        </div>
+        <form ng-submit="sendMessage()">
+          <input type="text" placeholder="Type a message..." ng-model="newMessage.content" class="form-control">
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+<script src="../controllers/MessagingController.js"></script>
+
+</html>

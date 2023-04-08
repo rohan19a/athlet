@@ -1,50 +1,106 @@
+<!DOCTYPE html>
 <html ng-app="myApp">
-  <div ng-controller="JobsController">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="job-listings">
-            <div class="job" ng-repeat="job in jobs">
-              <h3>{{ job.title }}</h3>
-              <p>{{ job.description }}</p>
-              <p><strong>{{ job.company }}</strong></p>
-              <p>{{ job.location }}</p>
+
+<head>
+  <title>Job Listings</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="#">
+    {{ companyName }}
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon">
+    </span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="./home">
+      Home
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./profile">
+      Profile
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./messaging">
+      Messages
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./connections">
+      Connections
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="./jobs">
+      Jobs
+      </a>
+      <li class="nav-item">
+      <a class="nav-link" ng-click="showNotifications()">
+        Notifications
+        <span class="badge badge-light">
+        {{ notifications.length }}
+        </span>
+      </a>
+      </li>
+    </ul>
+  </div>
+  </nav>
+
+
+
+<body ng-controller="JobsController">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-3 col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Filler Information</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget ipsum sit amet lacus finibus sodales ac non magna. Integer non dolor turpis. Aliquam at lobortis libero.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-8">
+        <div class="job-listings">
+          <div class="row">
+            <div class="col">
+              <input type="text" ng-model="search" placeholder="Search Jobs" class="form-control">
             </div>
+            <div class="col-auto">
+              <button class="btn btn-primary">Search</button>
+            </div>
+          </div>
+          <hr>
+          <div class="job" ng-repeat="job in jobs | filter:search">
+            <h3>{{ job.title }}</h3>
+            <p>{{ job.description }}</p>
+            <p><strong>{{ job.company }}</strong></p>
+            <p>{{ job.location }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Filler Information</h5>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget ipsum sit amet lacus finibus sodales ac non magna. Integer non dolor turpis. Aliquam at lobortis libero.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="style.css">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
-
-<script>
-  //import angular 
-var app = angular.module('myApp', []);
-
-app.controller('JobsController', function($scope) {
-  console.log("JobsController loaded")
-  $scope.jobs = [
-    {
-      title: "Software Developer",
-      description: "Develop software using modern programming languages",
-      company: "Acme Inc.",
-      location: "San Francisco, CA"
-    },
-    {
-      title: "Data Analyst",
-      description: "Analyze data using statistical techniques",
-      company: "XYZ Corp.",
-      location: "New York, NY"
-    },
-    {
-      title: "Marketing Manager",
-      description: "Develop and implement marketing strategies",
-      company: "Marketing Co.",
-      location: "Los Angeles, CA"
-    },
-  ];
-});
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+<script src="../controllers/JobController.js"></script>
